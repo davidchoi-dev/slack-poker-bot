@@ -130,11 +130,11 @@ class Bot {
   // Returns an {Observable} that signals completion of the game
   startGame(messages, channel, players) {
     if (players.length <= 1) {
-      channel.send('플레이어 수가 충분하지 않습니다, 다시 시도해주세요.');
+      channel.send('플레이어 수가 충분하지 않습니다. 다시 시도해주세요.');
       return rx.Observable.return(null);
     }
 
-    channel.send(`${players.length} 명의 플레이어가 모였습니다, 게임을 시작합니다.`);
+    channel.send(`${players.length} 명의 플레이어가 모였습니다. 게임을 시작합니다.`);
     this.isGameRunning = true;
 
     let game = new TexasHoldem(this.slack, messages, channel, players);
