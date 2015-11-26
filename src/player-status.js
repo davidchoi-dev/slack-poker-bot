@@ -52,18 +52,18 @@ class PlayerStatus {
 
     let handStatus = `${tableFormatter}${textTable(table)}${tableFormatter}`;
     let potBreakdown = '';
-    
+
     for (let idx = 0; idx < potManager.pots.length; idx++) {
       let amount = potManager.pots[idx].amount;
       if (amount === 0) continue;
-      
+
       if (idx === 0) {
-        potBreakdown += `Main Pot: $${amount}\n`;
+        potBreakdown += `메인 금액: $${amount}\n`;
       } else {
-        potBreakdown += `Side Pot: $${amount}\n`;
+        potBreakdown += `추가 금액: $${amount}\n`;
       }
     }
-    
+
     handStatus = `${handStatus}\n${potBreakdown}`;
     channel.send(handStatus);
   }

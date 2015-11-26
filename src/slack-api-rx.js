@@ -16,11 +16,11 @@ module.exports = class SlackApiRx {
         return acc;
       }, {})
       .publishLast();
-      
+
     ret.connect();
     return ret;
   }
-  
+
   // Private: Checks for the existence of an open DM channel for the user,
   // opens one if necessary, then waits for the `im_open` event and retrieves
   // the DM channel.
@@ -34,37 +34,37 @@ module.exports = class SlackApiRx {
   static getOrOpenDm(slackApi, user) {
     console.log(`Getting DM channel for ${user.name}`);
     let dm = slackApi.getDMByName(user.name);
-    
+
     // Bot players don't need DM channels; we only talk to humans
     if ((dm && dm.is_open) || user.isBot) {
       return rx.Observable.return({id: user.id, dm: dm});
     }
-    
+
     console.log(`No open channel found, opening one using ${user.id}`);
-    
+
     return SlackApiRx.openDm(slackApi, user)
       .flatMap(() => SlackApiRx.waitForDmToOpen(slackApi, user))
       .flatMap((dm) => rx.Observable.return({id: user.id, dm: dm}))
       .catch(rx.Observable.return({id: user.id, dm: null}));
   }
-  
+
   // Private: Maps the `im.open` API call into an {Observable}.
   //
   // Returns an {Observable} that signals completion, or an error if the API
   // call fails
   static openDm(slackApi, user) {
     let calledOpen = new rx.AsyncSubject();
-    
+
     slackApi.openDM(user.id, (result) => {
       if (result.ok) {
         calledOpen.onNext(user.name);
         calledOpen.onCompleted();
       } else {
-        console.log(`Unable to open DM for ${user.name}: ${result.error}`);
+        console.log(`${user.name} 님께 직접 대화를 걸 수 없습니다: ${result.error}`);
         calledOpen.onError(new Error(result.error));
       }
     })
-    
+
     return calledOpen;
   }
 
@@ -77,10 +77,10 @@ module.exports = class SlackApiRx {
     let ret = rx.DOM.fromEvent(slackApi, 'raw_message')
       .where((m) => m.type === 'im_open' && m.user === user.id)
       .take(1)
-      .flatMap(() => rx.Observable.timer(100).map(() => 
+      .flatMap(() => rx.Observable.timer(100).map(() =>
         slackApi.getDMByName(user.name)))
       .publishLast();
-      
+
     ret.connect();
     return ret;
   }
