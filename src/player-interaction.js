@@ -14,7 +14,7 @@ class PlayerInteraction {
   // Returns an {Observable} that will `onNext` for each player that joins and
   // `onCompleted` when time expires or the max number of players join.
   static pollPotentialPlayers(messages, channel, scheduler=rx.Scheduler.timeout, timeout=30, maxPlayers=10) {
-    let formatMessage = t => `Who wants to play? Respond with 'yes' in this channel in the next ${t} seconds.`;
+    let formatMessage = t => `게임 즐기실 분 계신가요? ${t} 초안에 'yes'를 입력하면 게임에 참여하실 수 있습니다.`;
     let timeExpired = PlayerInteraction.postMessageWithTimeout(channel, formatMessage, scheduler, timeout);
 
     // Look for messages containing the word 'yes' and map them to a unique
@@ -47,7 +47,7 @@ class PlayerInteraction {
     scheduler=rx.Scheduler.timeout, timeout=30) {
     let availableActions = PlayerInteraction.getAvailableActions(player, previousActions);
     let formatMessage = t => PlayerInteraction.buildActionMessage(player, availableActions, t);
-    
+
     let timeExpired = null;
     let expiredDisp = null;
     if (timeout > 0) {
@@ -66,7 +66,7 @@ class PlayerInteraction {
       .publish();
 
     playerAction.connect();
-    
+
     // If the user times out, they will be auto-folded unless they can check.
     let actionForTimeout = timeExpired.map(() =>
       availableActions.indexOf('check') > -1 ?
@@ -114,15 +114,15 @@ class PlayerInteraction {
   //
   // Returns the formatted string
   static buildActionMessage(player, availableActions, timeRemaining) {
-    let message = `${player.name}, it's your turn. Respond with:\n`;
+    let message = `${player.name} 님, 회원님의 차례입니다. 명령어는 다음과 같습니다:\n`;
     for (let action of availableActions) {
       message += `*(${action.charAt(0).toUpperCase()})${action.slice(1)}*\t`;
     }
-    
+
     if (timeRemaining > 0) {
-      message += `\nin the next ${timeRemaining} seconds.`;
+      message += `\n ${timeRemaining} 초내로 응답해주세요.`;
     }
-    
+
     return message;
   }
 
@@ -156,7 +156,7 @@ class PlayerInteraction {
     if (raiseIndex > -1) {
       let previousWager = player.lastAction ? player.lastAction.amount : 0;
       let availableChips = player.chips + previousWager;
-      
+
       if (_.max(betActions, a => a.amount).amount >= availableChips) {
         availableActions.splice(raiseIndex, 1);
       }
