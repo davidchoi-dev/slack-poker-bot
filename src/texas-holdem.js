@@ -550,7 +550,7 @@ class TexasHoldem {
   postActionToChannel(player, action, postingBlind='') {
     let message = postingBlind === '' ?
       `${player.name} ${action.name}s` :
-      `${player.name} posts ${postingBlind} of`;
+      `${player.name} 님께서 다음과 같은 가격으로 ${postingBlind} 를 입찰합니다 :`;
 
     if (action.name === 'bet')
       message += ` $${action.amount}.`;
