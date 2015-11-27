@@ -5,14 +5,11 @@
 ![](https://s3.amazonaws.com/f.cl.ly/items/3w3k222T0A1o2e0d033Q/Image%202015-09-01%20at%2011.41.33%20PM.png)
 ![](https://s3.amazonaws.com/f.cl.ly/items/2a073W0Q1Y2N0O2U1i3p/Image%202015-09-01%20at%2011.39.28%20PM.png)
 
-동영상을 통해 확인해보세요 [in action](https://www.youtube.com/watch?v=Joku-PKUObE).
+[동영상](https://www.youtube.com/watch?v=Joku-PKUObE)을 통해 확인해보세요.
 
 ## 시작하기
-1. Create a new [bot integration](https://my.slack.com/services/new/bot)
 1. 새로운 [bot integration](https://my.slack.com/services/new/bot)을 생성합니다.
-1. Follow the steps to deploy the bot to Heroku or run it locally
 1. Heroku의 deploy 기능을 사용하거나 로컬에서 실행시킵니다.
-1. Once the bot is running, start a game with: `@<your-bot-name>: deal`
 1. 봇이 실행중일때, 다음과 같은 명령어로 게임을 시작하세요: `@<your-bot-name>: deal`
 
 #### 원클릭으로 Heroku에서 실행하기
@@ -21,9 +18,7 @@
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 #### Heroku 메뉴얼
-1. Install [Heroku toolbelt](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
 1. [Heroku toolbelt](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)을 설치합니다.
-1. Create a new bot integration (as above)
 1. 새로운 bot integration을 생성합니다 (이전 단락과 같습니다.)
 1. `heroku create`
 1. `heroku config:set SLACK_POKER_BOT_TOKEN=[Your API token]`
@@ -66,7 +61,6 @@ timeout 없이 사용하시려면 값을 0으로 설정해주세요.
 The tests produce legible output that matches what users in Slack would see. This is the same test suite that is run on each pull request. This is very helpful when diagnosing a logic bug:
 ![](https://s3.amazonaws.com/f.cl.ly/items/2L0Y2Y3d3g0i1x171n2V/Image%202015-09-08%20at%207.00.40%20PM.png)
 
-### Dependencies
 ### 의존성
 * [NodeJS Slack Client](https://github.com/slackhq/node-slack-client)
 `node-slack-client` abstracts the basics of a Slack bot, including authentication, getting messages from players, and posting messages or attachments to the channel.
