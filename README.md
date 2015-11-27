@@ -1,4 +1,4 @@
-## Slack Poker Bot [![Build Status](https://travis-ci.org/CharlieHess/slack-poker-bot.png)](https://travis-ci.org/CharlieHess/slack-poker-bot)
+## Slack Poker Bot (Korean Version) [![Build Status](https://travis-ci.org/CharlieHess/slack-poker-bot.png)](https://travis-ci.org/CharlieHess/slack-poker-bot)
 
 이 봇은 슬랙에 텍사스 홀덤 클라이언트를 제공합니다. 2~10명의 플레이어와 함께 어떠한 channel이나 private group에서도 게임을 즐겨보세요. 포커봇은 패를 다루기도 하며, 플레이어에게 direct message로 패를 제공합니다. 또한, 판의 승패를 결정하기도 합니다.
 
